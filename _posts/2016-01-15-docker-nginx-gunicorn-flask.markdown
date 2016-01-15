@@ -15,7 +15,7 @@ Here's the directory structure:
 		requirements.txt
 		supervisord.conf
 
-Dockerfile looks like this:
+Dockerfile:
 
 	from python:2.7
 
