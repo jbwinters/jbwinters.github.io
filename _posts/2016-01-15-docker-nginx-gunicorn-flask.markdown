@@ -120,4 +120,4 @@ Nginx passes web traffic (port 80) through to gunicorn's exposed port 5000. We e
 	docker build -t server -f Dockerfile
 	docker run -p 80:80 server
 
-After all this is set up and the docker container is running, curl your endpoint (hosted at the docker host's port 80). The WSGI request will be posted to your container's log (stdout with the above docker commands). In fact, all of your app's logging events will be posted!
+`-p 80:80` exposes your container's port 80 and maps it to the container's internal port 80. After all this is set up and the docker container is running, curl your endpoint (hosted at the docker host's port 80). The WSGI request will be posted to your container's log (stdout with the above docker commands). In fact, all of your app's logging events will be posted!
