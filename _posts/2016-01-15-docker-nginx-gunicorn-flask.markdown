@@ -10,9 +10,8 @@ Here's the directory structure:
 	myapp/
 		app.conf
 		Dockerfile
-		my_app_package/
-			__init__.py
 		requirements.txt
+		run.py
 		supervisord.conf
 
 Dockerfile:
@@ -101,9 +100,11 @@ Bump versions as needed. For this example you only need to install flask and wsg
 run.py:
 {% highlight python %}
 import logging
+
+import flask
 from requestlogger import WSGILogger, ApacheFormatter
 
-from my_app_package import app
+app = flask.Flask(__name__)
 
 loggingapp = WSGILogger(app, [logging.StreamHandler()], ApacheFormatter())
 
@@ -111,7 +112,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0')
 {% endhighlight %}
 
-Replace the `from my_app_package import app` with whatever you need to include the app in run.py. Note that `ApacheFormatter` is wsgi-request-logger's default formatter and can be replaced with a custom formatter as desired.
+It doesn't matter how you get `app` into run.py here, you could import it from some other module. However, if you don't want to run the app from run.py you'll have to change the gunicorn launch command in supervisor.conf to reference your desired module instead of `run`. Note that `ApacheFormatter` is wsgi-request-logger's default formatter and can be replaced with a custom formatter as desired.
 
 Nginx passes web traffic (port 80) through to gunicorn's exposed port 5000. We expose the container's port 80:
 
