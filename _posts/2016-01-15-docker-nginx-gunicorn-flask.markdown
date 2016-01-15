@@ -109,7 +109,8 @@ app = flask.Flask(__name__)
 loggingapp = WSGILogger(app, [logging.StreamHandler()], ApacheFormatter())
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    # This is only used when calling `python run.py` directly! Useful if you want to use flask's debug mode.
+    app.run(host='0.0.0.0')  
 {% endhighlight %}
 
 It doesn't matter how you get `app` into run.py here, you could import it from some other module. However, if you don't want to run the app from run.py you'll have to change the gunicorn launch command in supervisor.conf to reference your desired module instead of `run`. Note that `ApacheFormatter` is wsgi-request-logger's default formatter and can be replaced with a custom formatter as desired.
