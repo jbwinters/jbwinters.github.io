@@ -20,7 +20,7 @@ Dockerfile:
 
 	# Install system requirements
 	RUN apt-get update
-	RUN apt-get install -y gunicorn nginx supervisor
+	RUN apt-get install -y nginx supervisor
 
 	# Set up app
 	ENV APPDIR /usr/src/app
@@ -88,6 +88,7 @@ The stdout_logfile/stderr_logfile stuff makes `[program:x]` output visible in st
 requirements.txt:
 
 	flask==0.10.1
+	gunicorn==19.4.5
 	itsdangerous==0.24
 	Jinja2==2.8
 	MarkupSafe==0.23
