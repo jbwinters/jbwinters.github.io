@@ -3,7 +3,7 @@ layout: post
 title:  "Nginx/gunicorn/flask in Docker"
 date:   2016-01-15 16:27:58
 ---
-Spent some time setting up a flask server on top of gunicorn/nginx/supervisor in Docker. I didn't find a comprehensive resource on how to do this the way I wanted. Specifically, I wanted Werkzeug-like WSGI logging which gunicorn doesn't do on its own, and logging from the app streamed to stdout which gunicorn and supervisor both disable by default. Fortunately this task ended up being fairly simple!
+Spent some time setting up a flask server on top of gunicorn/nginx/supervisor with Docker. I didn't find a comprehensive resource on how to do this the way I wanted. Specifically, I wanted Werkzeug-like WSGI logging which gunicorn doesn't do on its own, and logging from the app streamed to stdout which gunicorn and supervisor both disable by default. Fortunately this task ended up being fairly simple!
 
 Here's the directory structure:
 
