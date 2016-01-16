@@ -81,9 +81,8 @@ supervisord.conf:
 	stdout_logfile_maxbytes=0
 	stderr_logfile=/dev/stderr
 	stderr_logfile_maxbytes=0
-	accesslog=-
 
-The stdout_logfile/stderr_logfile stuff makes `[program:x]` output visible in stdout/stderr when supervisord is not a daemon. gunicorn is launched with `--enable-stdio-inheritance` so output is properly redirected. `run:loggingapp` tells gunicorn to run the `loggingapp` app in the `run` module.
+The stdout_logfile/stderr_logfile stuff makes `[program:x]` output visible in stdout/stderr when supervisord is not a daemon. gunicorn is launched with `--enable-stdio-inheritance` so output is properly redirected. `run:loggingapp` tells gunicorn to run the `loggingapp` app in the `run` module. PYTHONUNBUFFERED is set so log entries are flushed immediately.
 
 requirements.txt:
 
