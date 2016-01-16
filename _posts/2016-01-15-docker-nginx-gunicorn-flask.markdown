@@ -96,7 +96,7 @@ requirements.txt:
 	wheel==0.24.0
 	wsgi-request-logger==0.4.4
 
-Bump versions as needed. For this example you only need to install flask and wsgi-request-logger. We use [wsgi-request-logger](https://github.com/pklaus/wsgi-request-logger) to do the real work of logging WSGI events.
+Bump versions as needed. For this example you only need to install flask, gunicorn, and wsgi-request-logger. We use [wsgi-request-logger](https://github.com/pklaus/wsgi-request-logger) to do the real work of logging WSGI events.
 
 run.py:
 {% highlight python %}
