@@ -83,7 +83,7 @@ supervisord.conf:
 	stderr_logfile_maxbytes=0
 	accesslog=-
 
-The stdout_logfile/stderr_logfile stuff makes `[program:x]` output visible when supervisord is not a daemon. gunicorn is launched with `--enable-stdio-inheritance` so output is properly redirected. `run:loggingapp` tells gunicorn to run the `loggingapp` app in the `run` module.
+The stdout_logfile/stderr_logfile stuff makes `[program:x]` output visible in stdout/stderr when supervisord is not a daemon. gunicorn is launched with `--enable-stdio-inheritance` so output is properly redirected. `run:loggingapp` tells gunicorn to run the `loggingapp` app in the `run` module.
 
 requirements.txt:
 
@@ -113,11 +113,11 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0')  
 {% endhighlight %}
 
-It doesn't matter how you get `app` into run.py here, you could import it from some other module. However, if you don't want to run the app from run.py you'll have to change the gunicorn launch command in supervisor.conf to reference your desired module instead of `run`. Note that `ApacheFormatter` is wsgi-request-logger's default formatter and can be replaced with a custom formatter as desired.
+It doesn't matter how you get `app` into run.py here, you could import it from some other module. However, if you don't want to run the app from run.py you'll have to change the gunicorn launch command in supervisord.conf to reference your desired module instead of `run`. Note that `ApacheFormatter` is wsgi-request-logger's default formatter and can be replaced with a custom formatter as desired. `loggingapp` wraps `app` to log requests as they come in.
 
 Nginx passes web traffic (port 80) through to gunicorn's exposed port 5000. We expose the container's port 80:
 
 	docker build -t server -f Dockerfile
 	docker run -p 80:80 server
 
-`-p 80:80` exposes your container's port 80 and maps it to the container's internal port 80. After all this is set up and the docker container is running, curl your endpoint (hosted at the docker host's port 80). The WSGI request will be posted to your container's log (stdout with the above docker commands). In fact, all of your app's logging events will be posted!
+`-p 80:80` exposes your container's port 80 and maps it to the container's internal port 80. After all this is set up and the docker container is running, curl your endpoint (hosted at the docker host's port 80). The WSGI request will be posted to your container's log (stdout with the above docker commands). In fact, all of your app's logging events will be posted! If you are running your container as a daemon view your logs with ``docker logs `docker ps -q --filter="image=server"```
