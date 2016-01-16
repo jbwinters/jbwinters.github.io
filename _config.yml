@@ -1,6 +1,6 @@
 # Site settings
 title: Blog n' Stuff
-email: jbwint [at] umich [dot] edu
+email: jbwint {at] umich [dot} edu
 description: > # this means to ignore newlines until "baseurl:"
   Blah blah blah
 baseurl: "" # the subpath of your site, e.g. /blog/
